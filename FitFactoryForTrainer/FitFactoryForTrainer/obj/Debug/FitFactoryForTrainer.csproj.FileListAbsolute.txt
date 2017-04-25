@@ -16,3 +16,6 @@ C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\FitFactoryForTrainer\FitFa
 C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\FitFactoryForTrainer\FitFactoryForTrainer\obj\Debug\FitFactoryForTrainer.EditWorkoutWindow.resources
 C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\FitFactoryForTrainer\FitFactoryForTrainer\obj\Debug\FitFactoryForTrainer.Messenger.resources
 C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\FitFactoryForTrainer\FitFactoryForTrainer\obj\Debug\FitFactoryForTrainer.History.resources
+E:\.NET workspace\.NET-workspace\FitFactoryForTrainer\FitFactoryForTrainer\bin\Debug\FitFactoryForTrainer.exe.config
+E:\.NET workspace\.NET-workspace\FitFactoryForTrainer\FitFactoryForTrainer\obj\Debug\FitFactoryForTrainer.exe
+E:\.NET workspace\.NET-workspace\FitFactoryForTrainer\FitFactoryForTrainer\obj\Debug\FitFactoryForTrainer.pdb
