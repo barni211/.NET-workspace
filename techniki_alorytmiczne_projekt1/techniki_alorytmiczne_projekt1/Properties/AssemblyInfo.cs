@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("techniki_algorytmiczne - projekt 1")]
+[assembly: AssemblyTitle("techniki_alorytmiczne_projekt1")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("techniki_algorytmiczne - projekt 1")]
+[assembly: AssemblyProduct("techniki_alorytmiczne_projekt1")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ae39bd0a-1a2a-40a2-9471-003ca8bb4f38")]
+[assembly: Guid("240a361a-b4fd-464e-a355-d85b0002bfc5")]
 
 // Version information for an assembly consists of the following four values:
 //
