@@ -53,7 +53,6 @@
       <DependentUpon>frmLabirynt.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Corritage.cs" />
-    <Compile Include="Model\Door.cs" />
     <Compile Include="Model\Figure.cs" />
     <Compile Include="Model\Move.cs" />
     <Compile Include="Model\Player.cs" />

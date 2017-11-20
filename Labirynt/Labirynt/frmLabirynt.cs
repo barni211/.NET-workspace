@@ -21,6 +21,7 @@ namespace Labirynt
         private Pen playerPencil;
         private Player player;
         private bool isPlayerInRoom;
+        private bool isMagicTypeOn;
         
         public frmLabirynt()
         {
@@ -69,8 +70,15 @@ namespace Labirynt
             figureList.Add(player);
         }
 
+        public void AddMagicElements()
+        {
+
+        }
+
         public void AddElements()
         {
+            isMagicTypeOn = false;
+
             g.Clear(Color.Azure);
             figureList.Clear();
 
@@ -184,7 +192,13 @@ namespace Labirynt
                     break;
                 case Keys.D1:
                     AddElements();
-                    break;                
+                    break;
+                case Keys.D2:
+                    AddMagicElements();
+                    break;
+                case Keys.M:
+                    startMagicType();
+                    break;               
             }
             DrawMap();     
         }
@@ -219,6 +233,10 @@ namespace Labirynt
             if(isPlayerInRoom==true)
             {
                 return false;
+            }
+            if(isMagicTypeOn)
+            {
+                return true;
             }
 
             Point playerPosition = player.playerPosition();
@@ -274,6 +292,22 @@ namespace Labirynt
             }
             return false;
         }
-        
+
+        public void startMagicType()
+        {
+            if(isMagicTypeOn==false)
+            {
+                isMagicTypeOn = true;
+            }
+            else
+            {
+                isMagicTypeOn = false;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
