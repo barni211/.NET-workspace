@@ -65,24 +65,36 @@ namespace ServerWithOwnLogger
                     {
                         case "INFO":
                             log.SetLoggerLevel(Level.INFO);
+                            log.WriteLog(Level.INFO, "Changed logging level to: " + theString);
                             break;
                         case "DEBUG":
                             log.SetLoggerLevel(Level.DEBUG);
+                            log.WriteLog(Level.INFO, "Changed logging level to: " + theString);
                             break;
                         case "WARN":
                             log.SetLoggerLevel(Level.WARN);
+                            log.WriteLog(Level.INFO, "Changed logging level to: " + theString);
                             break;
                         case "ALERT":
                             log.SetLoggerLevel(Level.ALERT);
+                            log.WriteLog(Level.INFO, "Changed logging level to: " + theString);
                             break;
                         case "ERROR":
                             log.SetLoggerLevel(Level.ERROR);
+                            log.WriteLog(Level.INFO, "Changed logging level to: " + theString);
                             break;
                         case "FATAL":
                             log.SetLoggerLevel(Level.FATAL);
+                            log.WriteLog(Level.INFO, "Changed logging level to: " + theString);
+                            break;
+                        case "exit":
+                            log.WriteLog(Level.INFO, "Exit from app.");
+                            break;
+                        default:
+                            log.WriteLog(Level.INFO, "Unkown command from client " + socketForClient.RemoteEndPoint + ": " + theString);
                             break;
                     }
-                    log.WriteLog(Level.INFO, "Changed logging level to: " + theString);
+                    
                     if (theString == "exit")
                         break;
                 }
@@ -100,8 +112,8 @@ namespace ServerWithOwnLogger
             log = new Logger.Logger();
             Logger.ConsoleOutputter cons = new ConsoleOutputter();
             Logger.FileOutputter file = new FileOutputter();
-           // SocketOutputter sockLogger = new SocketOutputter("localhost", 1800);
-           // log.SetLoggerOutput(sockLogger);
+            SocketOutputter sockLogger = new SocketOutputter("localhost", 1800);
+            log.SetLoggerOutput(sockLogger);
             log.SetLoggerLevel(Level.FATAL);
             log.SetLoggerOutput(cons);
             log.SetLoggerOutput(file);
