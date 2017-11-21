@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Labirynt.Model
 {
-    public class Room : Figure
+    public class Room : Figure, RoomFace
     {
         private Point location;
         private int width;

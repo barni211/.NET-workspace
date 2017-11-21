@@ -52,12 +52,16 @@
     <Compile Include="frmLabirynt.Designer.cs">
       <DependentUpon>frmLabirynt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\ColorFactory.cs" />
     <Compile Include="Model\Corritage.cs" />
+    <Compile Include="Model\Factory.cs" />
     <Compile Include="Model\Figure.cs" />
     <Compile Include="Model\Move.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\RedRoom.cs" />
     <Compile Include="Model\Room.cs" />
+    <Compile Include="Model\RoomFace.cs" />
+    <Compile Include="Model\StandardFactory.cs" />
     <Compile Include="Model\YellowCorritage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

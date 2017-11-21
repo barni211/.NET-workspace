@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Labirynt.Model
 {
-    public class RedRoom : Figure
+    public class RedRoom : Figure, RoomFace
     {
         private Point location;
         private int width;
@@ -25,7 +25,7 @@ namespace Labirynt.Model
         {
             if (isPlayerInRoom == true)
             {
-                g.FillRectangle(new SolidBrush(Color.Green), location.X, location.Y, width, length);
+                g.FillRectangle(new SolidBrush(Color.Black), location.X, location.Y, width, length);
             }
             p.Color = Color.Red;
             g.DrawRectangle(p, location.X, location.Y, width, length);
