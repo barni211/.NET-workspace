@@ -52,17 +52,17 @@
     <Compile Include="frmLabirynt.Designer.cs">
       <DependentUpon>frmLabirynt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\ColorFactory.cs" />
-    <Compile Include="Model\Corritage.cs" />
-    <Compile Include="Model\Factory.cs" />
-    <Compile Include="Model\Figure.cs" />
-    <Compile Include="Model\Move.cs" />
-    <Compile Include="Model\Player.cs" />
-    <Compile Include="Model\RedRoom.cs" />
-    <Compile Include="Model\Room.cs" />
-    <Compile Include="Model\RoomFace.cs" />
-    <Compile Include="Model\StandardFactory.cs" />
-    <Compile Include="Model\YellowCorritage.cs" />
+    <Compile Include="Model\Factory\ColorFactory.cs" />
+    <Compile Include="Model\Classes\Corritage.cs" />
+    <Compile Include="Model\Interfaces\Factory.cs" />
+    <Compile Include="Model\Interfaces\Figure.cs" />
+    <Compile Include="Model\Enums\Move.cs" />
+    <Compile Include="Model\Classes\Player.cs" />
+    <Compile Include="Model\Classes\RedRoom.cs" />
+    <Compile Include="Model\Classes\Room.cs" />
+    <Compile Include="Model\Interfaces\RoomFace.cs" />
+    <Compile Include="Model\Factory\StandardFactory.cs" />
+    <Compile Include="Model\Classes\YellowCorritage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmLabirynt.resx">
@@ -90,6 +90,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
