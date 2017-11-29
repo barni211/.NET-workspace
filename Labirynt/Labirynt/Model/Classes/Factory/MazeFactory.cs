@@ -11,14 +11,18 @@ namespace Labirynt.Model.Classes
     public class MazeFactory
     {
         private Dictionary<MazeType, Factory> mazeList;
-        private List<Figure> figureList;
+        private Dictionary<string, MazeType> mazeTypeConverter; //mapa mazeTypeConverter powstała w celu uniknięcia switcha przy wyborze typu labiryntu
+        private List<Figure> figureList;                        //switch został w kodzie - do wyjaśnienia które rozwiązanie byłoby lepsze.
         private MazeType maze;
         private Factory factoryObject;
         public MazeFactory()
         {
             mazeList = new Dictionary<MazeType, Factory>();
+            mazeTypeConverter = new Dictionary<string, MazeType>();
             mazeList.Add(MazeType.STANDARD, new StandardFactory());
             mazeList.Add(MazeType.MAGIC, new ColorFactory());
+            mazeTypeConverter.Add("STANDARD", MazeType.STANDARD);
+            mazeTypeConverter.Add("MAGIC", MazeType.MAGIC);
             figureList = new List<Figure>();
         }
 
@@ -36,15 +40,16 @@ namespace Labirynt.Model.Classes
             {
                 if(firstLine==true)
                 {
-                    switch(line)
-                    {
-                        case "MAGIC":
-                            maze = MazeType.MAGIC;
-                            break;
-                        case "STANDARD":
-                            maze = MazeType.STANDARD;
-                            break;
-                    }
+                    //switch(line)
+                    //{
+                    //    case "MAGIC":
+                    //        maze = MazeType.MAGIC;
+                    //        break;
+                    //    case "STANDARD":
+                    //        maze = MazeType.STANDARD;
+                    //        break;
+                    //}
+                    maze = mazeTypeConverter[line];
                     factoryObject = mazeList[maze].getInstance();
                     firstLine = false;
                     continue;
