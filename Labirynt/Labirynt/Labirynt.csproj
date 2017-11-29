@@ -52,19 +52,19 @@
     <Compile Include="frmLabirynt.Designer.cs">
       <DependentUpon>frmLabirynt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\Classes\MazeFactory.cs" />
+    <Compile Include="Model\Classes\Factory\MazeFactory.cs" />
     <Compile Include="Model\Enums\MazeType.cs" />
     <Compile Include="Model\Factory\ColorFactory.cs" />
-    <Compile Include="Model\Classes\Corritage.cs" />
+    <Compile Include="Model\Classes\Objects\Corritage.cs" />
     <Compile Include="Model\Interfaces\Factory.cs" />
     <Compile Include="Model\Interfaces\Figure.cs" />
     <Compile Include="Model\Enums\Move.cs" />
-    <Compile Include="Model\Classes\Player.cs" />
-    <Compile Include="Model\Classes\RedRoom.cs" />
-    <Compile Include="Model\Classes\Room.cs" />
+    <Compile Include="Model\Classes\Objects\Player.cs" />
+    <Compile Include="Model\Classes\Objects\RedRoom.cs" />
+    <Compile Include="Model\Classes\Objects\Room.cs" />
     <Compile Include="Model\Interfaces\RoomFace.cs" />
     <Compile Include="Model\Factory\StandardFactory.cs" />
-    <Compile Include="Model\Classes\YellowCorritage.cs" />
+    <Compile Include="Model\Classes\Objects\YellowCorritage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmLabirynt.resx">
