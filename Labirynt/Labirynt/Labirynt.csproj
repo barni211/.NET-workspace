@@ -52,6 +52,8 @@
     <Compile Include="frmLabirynt.Designer.cs">
       <DependentUpon>frmLabirynt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Classes\MazeFactory.cs" />
+    <Compile Include="Model\Enums\MazeType.cs" />
     <Compile Include="Model\Factory\ColorFactory.cs" />
     <Compile Include="Model\Classes\Corritage.cs" />
     <Compile Include="Model\Interfaces\Factory.cs" />

@@ -1,4 +1,5 @@
 ﻿using Labirynt.Model;
+using Labirynt.Model.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -71,21 +72,18 @@ namespace Labirynt
 
         public void AddElements(int value)
         {
-            
-            Factory myFactory;
+            MazeFactory factoryObject = new MazeFactory();
             figureList.Clear();
-            
             if (value==1)
             {
-                myFactory = new StandardFactory();
-                isMagicTypeOn = false;
+                figureList = factoryObject.CreateMaze(@"E:\StandardFactory.txt");
             }
-            else
+            else if(value==2)
             {
-                myFactory = new ColorFactory();
+                figureList = factoryObject.CreateMaze(@"E:\MagicFactory.txt");
             }
-            figureList = myFactory.createObjects();
             CreatePlayer();
+            DrawMap();
         }
 
         
