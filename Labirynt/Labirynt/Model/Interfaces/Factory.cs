@@ -9,8 +9,8 @@ namespace Labirynt.Model
 {
     public interface Factory
     {
-        void AddCorritage(Point x, Point y, List<Figure> list);
-        void AddRoom(Point x, int length,int width, List<Figure> list);
+        void AddCorritage(string[] textObject , List<Figure> list);
+        void AddRoom(string[] textObject , List<Figure> list);
 
         Factory getInstance();
     }

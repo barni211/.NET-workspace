@@ -76,11 +76,11 @@ namespace Labirynt
             figureList.Clear();
             if (value==1)
             {
-                figureList = factoryObject.CreateMaze(@"E:\StandardFactory.txt");
+                figureList = factoryObject.CreateMazeFromTextFile(@"E:\StandardFactory.txt");
             }
             else if(value==2)
             {
-                figureList = factoryObject.CreateMaze(@"E:\MagicFactory.txt");
+                figureList = factoryObject.CreateMazeFromTextFile(@"E:\MagicFactory.txt");
             }
             CreatePlayer();
             DrawMap();
@@ -142,21 +142,12 @@ namespace Labirynt
             Point playerLoc = player.playerPosition();
             foreach (Figure item in figureList)
             {
-                if(item.GetType() == typeof(Room) || item.GetType()== typeof(RedRoom))
+                if(item.GetType() == typeof( Room) || item.GetType() == typeof(RedRoom))
                 {
                     if (playerLoc.X == item.StartPoint().X && playerLoc.Y == item.StartPoint().Y)
                     {
-                        RoomFace r1 = (RoomFace)item;
-                        if(r1.playerInside())
-                        {
-                            r1.leavePlayer();
-                            isPlayerInRoom = false;
-                        }
-                        else
-                        {
-                            r1.enterPlayer();
-                            isPlayerInRoom = true;
-                        }
+                        dynamic x = item;
+                        LeaveOrEnterRoom(x);
                     }
                 }
             }
@@ -242,6 +233,35 @@ namespace Labirynt
         private void button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void LeaveOrEnterRoom(Room room)
+        {
+
+            if (isPlayerInRoom==false)
+            {
+                room.enterPlayer();
+                isPlayerInRoom = true;
+            }
+            else
+            {
+                room.leavePlayer();
+                isPlayerInRoom = false;
+            }
+        }
+
+        private void LeaveOrEnterRoom(RedRoom room)
+        {
+            if (isPlayerInRoom==false)
+            {
+                room.enterPlayer();
+                isPlayerInRoom = true;
+            }
+            else
+            {
+                room.leavePlayer();
+                isPlayerInRoom = false;
+            }
         }
     }
 }

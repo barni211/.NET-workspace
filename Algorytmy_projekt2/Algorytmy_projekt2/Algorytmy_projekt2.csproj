@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F16A61D5-9FA0-4A87-B89A-AFEEF5E5892B}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{70D1F644-5CB1-403A-8B40-49F6B83523F3}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Labirynt</RootNamespace>
-    <AssemblyName>Labirynt</AssemblyName>
+    <RootNamespace>Algorytmy_projekt2</RootNamespace>
+    <AssemblyName>Algorytmy_projekt2</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -39,61 +39,18 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmLabirynt.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmLabirynt.Designer.cs">
-      <DependentUpon>frmLabirynt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Classes\DataReader\TextFileParser.cs" />
-    <Compile Include="Model\Classes\Factory\MazeFactory.cs" />
-    <Compile Include="Model\Enums\MazeType.cs" />
-    <Compile Include="Model\Factory\ColorFactory.cs" />
-    <Compile Include="Model\Classes\Objects\Corritage.cs" />
-    <Compile Include="Model\Interfaces\Factory.cs" />
-    <Compile Include="Model\Interfaces\Figure.cs" />
-    <Compile Include="Model\Enums\Move.cs" />
-    <Compile Include="Model\Classes\Objects\Player.cs" />
-    <Compile Include="Model\Classes\Objects\RedRoom.cs" />
-    <Compile Include="Model\Classes\Objects\Room.cs" />
-    <Compile Include="Model\Interfaces\RoomFace.cs" />
-    <Compile Include="Model\Factory\StandardFactory.cs" />
-    <Compile Include="Model\Classes\Objects\YellowCorritage.cs" />
+    <Compile Include="Child.cs" />
+    <Compile Include="GraphFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmLabirynt.resx">
-      <DependentUpon>frmLabirynt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

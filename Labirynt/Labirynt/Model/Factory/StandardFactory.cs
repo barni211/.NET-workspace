@@ -9,15 +9,18 @@ namespace Labirynt.Model
 {
     public class StandardFactory : Factory
     {
-        public void AddCorritage(Point x, Point y, List<Figure> list)
+        public void AddCorritage(string[] textObject, List<Figure> list)
         {
-            Corritage corit = new Corritage(x, y);
-            list.Add(corit);
+            Point x = new Point(Int32.Parse(textObject[1]), Int32.Parse(textObject[2]));
+            Point y = new Point(Int32.Parse(textObject[3]), Int32.Parse(textObject[4]));
+            Corritage corrit = new Corritage(x, y);
+            list.Add(corrit);
         }
 
-        public void AddRoom(Point x, int width, int length, List<Figure> list)
+        public void AddRoom(string[] textObject, List<Figure> list)
         {
-            Room room = new Room(x, 30, 30);
+            Point x = new Point(Int32.Parse(textObject[1]), Int32.Parse(textObject[2]));
+            Room room = new Room(x, Int32.Parse(textObject[3]), Int32.Parse(textObject[4]));
             list.Add(room);
         }
 
