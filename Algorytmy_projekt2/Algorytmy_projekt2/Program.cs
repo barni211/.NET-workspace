@@ -99,8 +99,8 @@ namespace Algorytmy_projekt2
 
         static void Main(string[] args)
         {
-            listaSasiedstwa = GraphFactory.CreateGraphFromFile(@"E:\GrafWalaszek.txt");
-            //listaSasiedstwa = GraphFactory.CreateGraph();
+           // listaSasiedstwa = GraphFactory.CreateGraphFromFile(@"E:\GrafWalaszek.txt");
+            listaSasiedstwa = GraphFactory.CreateGraph();
             Console.WriteLine("Graf podany na wejściu");
             WypiszGraf();
 
@@ -114,30 +114,30 @@ namespace Algorytmy_projekt2
 
             counter = 0;
 
-            Console.Write("Grupy nielubienia \n");
-            foreach(Child[] item in listaSkladowych)
-            {
-                //Console.Write(item.)
-                foreach(Child v in item.ToArray())
-                {
-                    Console.Write(v.name + " -> ");
-                }
-                Console.Write("\n");
-            }
-
             //Console.Write("Grupy nielubienia \n");
-            //for (int j = listaSkladowych.Count() - 1; j >= 0; j--)
+            //foreach(Child[] item in listaSkladowych)
             //{
-            //    Child[] item = listaSkladowych[j];
             //    //Console.Write(item.)
-            //    //foreach(Child v in item.ToArray())
-            //    for (int i = item.Count() - 1; i >= 0; --i)
+            //    foreach(Child v in item.ToArray())
             //    {
-            //        Console.Write(item[i].name + " -> ");
-            //        //Console.Write(v.name + " -> ");
+            //        Console.Write(v.name + " -> ");
             //    }
             //    Console.Write("\n");
             //}
+
+            Console.Write("Grupy nielubienia \n");
+            for (int j = listaSkladowych.Count() - 1; j >= 0; j--)
+            {
+                Child[] item = listaSkladowych[j];
+                //Console.Write(item.)
+                //foreach(Child v in item.ToArray())
+                for (int i = item.Count() - 1; i >= 0; --i)
+                {
+                    Console.Write(item[i].name + " -> ");
+                    //Console.Write(v.name + " -> ");
+                }
+                Console.Write("\n");
+            }
 
 
             int max = 0;
@@ -152,7 +152,7 @@ namespace Algorytmy_projekt2
             }
 
             Console.WriteLine("Największa grupa nielubienia: ");
-            for (int i =0;i <theBiggest.Count(); i++)
+            for (int i =theBiggest.Count() - 1 ;i >= 0 ; i--)
             {
                 Console.Write(theBiggest[i].name + " -> ");
             }
