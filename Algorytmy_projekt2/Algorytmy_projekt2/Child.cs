@@ -10,10 +10,10 @@ namespace Algorytmy_projekt2
     {
         private List<Child> adjusments;
         private bool visited = false;
-        private string name;
+        public int name { get; set; }
         public int number { get; set; }
 
-        public Child(string name)
+        public Child(int name)
         {
             adjusments = new List<Child>();
             this.name = name;

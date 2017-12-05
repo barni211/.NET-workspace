@@ -13,15 +13,15 @@ namespace Algorytmy_projekt2
         {
             List<Child> listaSasiedstwa = new List<Child>();
 
-            Child zero = new Child("0");
-            Child one = new Child("1");
-            Child two = new Child("2");
-            Child three = new Child("3");
-            Child four = new Child("4");
-            Child five = new Child("5");
-            Child six = new Child("6");
-            Child seven = new Child("7");
-            Child eight = new Child("8");
+            Child zero = new Child(0);
+            Child one = new Child(1);
+            Child two = new Child(2);
+            Child three = new Child(3);
+            Child four = new Child(4);
+            Child five = new Child(5);
+            Child six = new Child(6);
+            Child seven = new Child(7);
+            Child eight = new Child(8);
             listaSasiedstwa.Add(zero);
             listaSasiedstwa.Add(one);
             listaSasiedstwa.Add(two);
@@ -48,5 +48,68 @@ namespace Algorytmy_projekt2
 
             return listaSasiedstwa;
         }
+
+        public static List<Child> CreateGraphFromFile(string filePath)
+        {
+            if (filePath.Equals(""))
+            {
+                filePath = @"E:\GrafWalaszek.txt";
+            }
+            
+            List<Child> wierzcholki = CreateObjects(filePath);
+           
+            string line;
+            string[] textObject;
+            System.IO.StreamReader file = new System.IO.StreamReader(@filePath);
+            int counter = 0;
+            while ((line = file.ReadLine()) != null)
+            {   
+
+                textObject = line.Split(' ');
+                if (textObject.Count() > 1)
+                {
+                    for (int i = 1; i < textObject.Count(); i++)
+                    {
+                        Child temp = FindV(int.Parse(textObject[i]), wierzcholki);
+                        wierzcholki[counter].AddAdj(temp);
+                    }
+                }
+                counter++;
+
+            }
+            file.Close();
+
+            return wierzcholki;
+        }
+
+        private static List<Child> CreateObjects(string filePath)
+        {
+            List<Child> wierzcholki = new List<Child>();
+            System.IO.StreamReader file = new System.IO.StreamReader(@filePath);
+            string line;
+            string[] textObject;
+            while ((line = file.ReadLine()) != null)
+            {
+
+                textObject = line.Split(' ');
+                Child temp = new Child(int.Parse(textObject[0]));
+                wierzcholki.Add(temp);
+            }
+
+            return wierzcholki;
+        }
+
+        private static Child FindV(int number, List<Child> v)
+        {
+            foreach(Child wierzcholek in v)
+            {
+                if (wierzcholek.name == number)
+                {
+                    return wierzcholek;
+                }
+            }
+            return null;
+        }
     }
+    
 }
