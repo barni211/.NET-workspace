@@ -33,7 +33,7 @@ namespace Algorytmy_projekt2
             listaSasiedstwa.Add(eight);
 
             listaSasiedstwa.ElementAt(0).AddAdj(one);
-            listaSasiedstwa.ElementAt(1).AddAdj(one);
+            //listaSasiedstwa.ElementAt(1).AddAdj(one);
             listaSasiedstwa.ElementAt(1).AddAdj(eight);
             listaSasiedstwa.ElementAt(1).AddAdj(four);
             listaSasiedstwa.ElementAt(1).AddAdj(three);
@@ -95,6 +95,52 @@ namespace Algorytmy_projekt2
                 Child temp = new Child(int.Parse(textObject[0]));
                 wierzcholki.Add(temp);
             }
+
+            return wierzcholki;
+        }
+
+        public static List<Child> CreateGraphWithFriendlyKids(string filePath)
+        {
+            if (filePath.Equals(""))
+            {
+                filePath = @"E:\GrafWalaszek.txt";
+            }
+
+            List<Child> wierzcholki = CreateObjects(filePath);
+
+
+            //dodaje wierzchołki każdy z każdym
+            foreach(Child v in wierzcholki)
+            {
+                foreach(Child v2 in wierzcholki)
+                {
+                    if(v.Equals(v2)==false)
+                    {
+                        v.AddAdj(v2);
+                    }
+                }
+            }
+
+            string line;
+            string[] textObject;
+            System.IO.StreamReader file = new System.IO.StreamReader(@filePath);
+            int counter = 0;
+            while ((line = file.ReadLine()) != null)
+            {
+
+                textObject = line.Split(' ');
+                if (textObject.Count() > 1)
+                {
+                    for (int i = 1; i < textObject.Count(); i++)
+                    {
+                        Child temp = FindV(int.Parse(textObject[i]), wierzcholki);
+                        wierzcholki[counter].RemoveAdj(temp);
+                    }
+                }
+                counter++;
+
+            }
+            file.Close();
 
             return wierzcholki;
         }

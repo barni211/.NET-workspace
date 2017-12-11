@@ -1,5 +1,6 @@
 ﻿using Labirynt.Model;
 using Labirynt.Model.Classes;
+using Labirynt.Model.Classes.Objects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -142,12 +143,15 @@ namespace Labirynt
             Point playerLoc = player.playerPosition();
             foreach (Figure item in figureList)
             {
-                if(item.GetType() == typeof( Room) || item.GetType() == typeof(RedRoom))
+                if(item is RoomFace)// || item.GetType() == typeof(RedRoom))
                 {
-                    if (playerLoc.X == item.StartPoint().X && playerLoc.Y == item.StartPoint().Y)
+                    if (item != null)
                     {
-                        dynamic x = item;
-                        LeaveOrEnterRoom(x);
+                        if (playerLoc.X == item.StartPoint().X && playerLoc.Y == item.StartPoint().Y)
+                        {
+                            dynamic x = item;
+                            LeaveOrEnterRoom(x);
+                        }
                     }
                 }
             }
@@ -235,7 +239,7 @@ namespace Labirynt
 
         }
 
-        private void LeaveOrEnterRoom(Room room)
+        private void LeaveOrEnterRoom(StandardRoom room)
         {
 
             if (isPlayerInRoom==false)

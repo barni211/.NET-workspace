@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="Model\Classes\DataReader\TextFileParser.cs" />
     <Compile Include="Model\Classes\Factory\MazeFactory.cs" />
+    <Compile Include="Model\Classes\Objects\Room.cs" />
     <Compile Include="Model\Enums\MazeType.cs" />
     <Compile Include="Model\Factory\ColorFactory.cs" />
     <Compile Include="Model\Classes\Objects\Corritage.cs" />
@@ -62,7 +63,8 @@
     <Compile Include="Model\Enums\Move.cs" />
     <Compile Include="Model\Classes\Objects\Player.cs" />
     <Compile Include="Model\Classes\Objects\RedRoom.cs" />
-    <Compile Include="Model\Classes\Objects\Room.cs" />
+    <Compile Include="Model\Classes\Objects\StandardRoom.cs" />
+    <Compile Include="Model\Interfaces\IVisitable.cs" />
     <Compile Include="Model\Interfaces\RoomFace.cs" />
     <Compile Include="Model\Factory\StandardFactory.cs" />
     <Compile Include="Model\Classes\Objects\YellowCorritage.cs" />
@@ -80,6 +82,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

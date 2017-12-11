@@ -31,7 +31,8 @@ namespace Algorytmy_projekt2
         static List<Child> listaWierzcholkow = new List<Child>();
         static List<Child[]> listaSkladowych = new List<Child[]>();
         static Child[] theBiggest = new Child[30];
-       
+        static Dictionary<int, Child[]> listaCykli = new Dictionary<int, Child[]>();
+      //  static int rowsCounter = 0;
 
         static void DFSscc(Child v)
         {
@@ -73,14 +74,6 @@ namespace Algorytmy_projekt2
             }
         }
 
-        static Child MinimumValue(Child one, Child two)
-        {
-            if (one.number < two.number)
-                return one;
-            else
-                return two;
-        }
-
         static void WypiszGraf()
         {
             foreach(Child elem in listaSasiedstwa)
@@ -97,10 +90,156 @@ namespace Algorytmy_projekt2
             }
         }
 
+        static void SetVisitedToFalse()
+        {
+            foreach(Child elem in listaSasiedstwa)
+            {
+                elem.SetVisitToFalse();
+            }
+        }
+
+        static bool FindCycles(Child start, Child v)
+        {
+            v.Visit();
+            stack.Push(v);
+            foreach(Child adj in v.GetAdj())
+            {
+                if(adj.name == start.name)
+                {
+                    return true;
+                }
+                else if(adj.IsVisited()==false && FindCycles(start,adj))
+                {
+                    return true;
+                }
+            }
+            stack.Pop();
+            return false;
+        }
+
+        static int CheckCycles()
+        {
+            int cyclesCounter = 1;
+            List<Child> tmpChildList = new List<Child>();
+            Child tmpChild;
+            foreach (Child v in listaSasiedstwa)
+            {
+                SetVisitedToFalse();
+                if(FindCycles(v,v)==false)
+                {
+                    continue;
+                }
+
+                stack.Push(v);
+                while(stack.Count > 0)
+                {
+                    tmpChild = stack.Pop();
+                    tmpChildList.Add(tmpChild);
+                }
+                listaCykli.Add(cyclesCounter, tmpChildList.ToArray());
+                tmpChildList.Clear();
+
+                cyclesCounter++;
+            }
+            return cyclesCounter;
+        }
+
+        static int HowManyRowsIsNecessary()
+        {
+            bool allKidsAreInRows = false;
+            int rowsCounter = 0;
+            SetVisitedToFalse();
+            List<Child> tmpChildList = new List<Child>();
+            while(!allKidsAreInRows)
+            {
+                for(int i =0; i<listaSasiedstwa.Count(); ++i)
+                {
+                    if(listaSasiedstwa[i].IsVisited()==false)
+                    {
+                        if (tmpChildList.Count() == 0)
+                        {
+                            tmpChildList.Add(listaSasiedstwa[i]);
+                            listaSasiedstwa[i].Visit();
+                        }
+                        else
+                        {
+                            ChildRowsVerification(listaSasiedstwa[i], tmpChildList);
+                        }
+                    }
+
+                }
+                listaSkladowych.Add(tmpChildList.ToArray());
+                rowsCounter++;
+                tmpChildList.Clear();
+                allKidsAreInRows = AreAllChildsVisited();
+            }
+            return rowsCounter;
+        }
+
+        static bool AreAllChildsVisited()
+        {
+            foreach(Child item in listaSasiedstwa)
+            {
+                if(item.IsVisited()==false)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        static void ChildRowsVerification(Child actKid, List<Child> tmpChildList)
+        {
+            if(ChildIsGoodToAddAtTheFrontOf(actKid, tmpChildList))
+            {
+                tmpChildList.Add(actKid);
+                actKid.Visit();
+            }
+            else if(ChildIsGoodToAddBehind(actKid, tmpChildList))
+            {
+                tmpChildList.Add(actKid);
+                actKid.Visit();
+            }
+        }
+
+        static bool ChildIsGoodToAddAtTheFrontOf(Child actKid, List<Child> tmpChildList)
+        {
+            foreach(Child item in tmpChildList)
+            {
+                List<Child> adj = item.GetAdj();
+                foreach(Child adjItem in adj)
+                {
+                    if(adj.Equals(adjItem))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        static bool ChildIsGoodToAddBehind(Child actKid, List<Child> tmpChildList)
+        {
+            List<Child> adj = actKid.GetAdj();
+            for(int i = tmpChildList.Count() - 1; i>= 0; --i)
+            {
+                foreach(Child item in adj)
+                {
+                    if(listaSasiedstwa[i].Equals(item))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+
         static void Main(string[] args)
         {
-           // listaSasiedstwa = GraphFactory.CreateGraphFromFile(@"E:\GrafWalaszek.txt");
-            listaSasiedstwa = GraphFactory.CreateGraph();
+            string filePath = @"E:\jacek.txt";
+            listaSasiedstwa = GraphFactory.CreateGraphFromFile(filePath);
+            //listaSasiedstwa = GraphFactory.CreateGraph();
             Console.WriteLine("Graf podany na wejściu");
             WypiszGraf();
 
@@ -114,27 +253,13 @@ namespace Algorytmy_projekt2
 
             counter = 0;
 
-            //Console.Write("Grupy nielubienia \n");
-            //foreach(Child[] item in listaSkladowych)
-            //{
-            //    //Console.Write(item.)
-            //    foreach(Child v in item.ToArray())
-            //    {
-            //        Console.Write(v.name + " -> ");
-            //    }
-            //    Console.Write("\n");
-            //}
-
             Console.Write("Grupy nielubienia \n");
             for (int j = listaSkladowych.Count() - 1; j >= 0; j--)
             {
                 Child[] item = listaSkladowych[j];
-                //Console.Write(item.)
-                //foreach(Child v in item.ToArray())
-                for (int i = item.Count() - 1; i >= 0; --i)
+                for (int i = item.Count() - 1; i >= 0; i--)
                 {
                     Console.Write(item[i].name + " -> ");
-                    //Console.Write(v.name + " -> ");
                 }
                 Console.Write("\n");
             }
@@ -151,12 +276,61 @@ namespace Algorytmy_projekt2
                 }
             }
 
+            
+
             Console.WriteLine("Największa grupa nielubienia: ");
             for (int i =theBiggest.Count() - 1 ;i >= 0 ; i--)
             {
                 Console.Write(theBiggest[i].name + " -> ");
             }
 
+            int value = CheckCycles();
+
+            if (value > 0)
+            {
+                Console.Write("\nDzieci nie da się ustawić w rząd - w grafie występuje " + (value - 1) + " cykli:\n");
+                foreach (int key in listaCykli.Keys)
+                {
+                    Console.Write(key + " : ");
+                    for (int i = listaCykli[key].Count() - 1; i >= 0; i--)
+                    {
+                        Console.Write(listaCykli[key].ElementAt(i).name + " -> ");
+                    }
+                    Console.WriteLine();
+
+                }
+            }
+            else
+            {
+                Console.Write("\nDzieci z powodzeniem można ustawić w rząd - w grafie nie występują cykle.");
+            }
+
+
+            Console.WriteLine("\nProblem ustawienia dzieci w rzędy");
+            //v.number = counter++;
+            for(int i = 0; i<lowB.Count(); i++)
+            {
+                lowB[i] = -1;
+                sccQueue[i] = 1;
+            }
+           // sccQueue[v.number] = v.number;
+            listaSasiedstwa.Clear();
+            listaSasiedstwa = GraphFactory.CreateGraphFromFile(filePath);
+            listaSkladowych.Clear();
+
+            counter = HowManyRowsIsNecessary();
+
+            Console.WriteLine("\nDo ustawienia dzieci potrzeba " + counter + " rzedow");
+
+            for (int j = listaSkladowych.Count() - 1; j >= 0; j--)
+            {
+                Child[] item = listaSkladowych[j];
+                for (int i = item.Count() - 1; i >= 0; i--)
+                {
+                    Console.Write(item[i].name + " -> ");
+                }
+                Console.Write("\n");
+            }
 
             Console.ReadKey();
         }

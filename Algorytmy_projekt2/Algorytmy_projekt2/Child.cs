@@ -30,6 +30,11 @@ namespace Algorytmy_projekt2
             this.visited = true;
         }
 
+        public void SetVisitToFalse()
+        {
+            this.visited = false;
+        }
+
         public List<Child> GetAdj()
         {
             return this.adjusments;
@@ -38,6 +43,11 @@ namespace Algorytmy_projekt2
         public void AddAdj(Child c)
         {
             adjusments.Add(c);
+        }
+
+        public void RemoveAdj(Child c)
+        {
+            adjusments.Remove(c);
         }
     }
 }

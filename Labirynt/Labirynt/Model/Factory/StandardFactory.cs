@@ -20,7 +20,7 @@ namespace Labirynt.Model
         public void AddRoom(string[] textObject, List<Figure> list)
         {
             Point x = new Point(Int32.Parse(textObject[1]), Int32.Parse(textObject[2]));
-            Room room = new Room(x, Int32.Parse(textObject[3]), Int32.Parse(textObject[4]));
+            StandardRoom room = new StandardRoom(x, Int32.Parse(textObject[3]), Int32.Parse(textObject[4]));
             list.Add(room);
         }
 
