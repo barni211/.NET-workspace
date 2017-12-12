@@ -192,12 +192,17 @@ namespace Algorytmy_projekt2
         {
             if(ChildIsGoodToAddAtTheFrontOf(actKid, tmpChildList))
             {
-                tmpChildList.Add(actKid);
+                //tmpChildList.Add(actKid);
+                tmpChildList.Insert(0, actKid);
                 actKid.Visit();
             }
             else if(ChildIsGoodToAddBehind(actKid, tmpChildList))
             {
                 tmpChildList.Add(actKid);
+                actKid.Visit();
+            }
+            else if(ChildIsGoodToAddInside(actKid, tmpChildList))
+            {
                 actKid.Visit();
             }
         }
@@ -209,7 +214,7 @@ namespace Algorytmy_projekt2
                 List<Child> adj = item.GetAdj();
                 foreach(Child adjItem in adj)
                 {
-                    if(adj.Equals(adjItem))
+                    if(actKid.Equals(adjItem))
                     {
                         return false;
                     }
@@ -225,7 +230,7 @@ namespace Algorytmy_projekt2
             {
                 foreach(Child item in adj)
                 {
-                    if(listaSasiedstwa[i].Equals(item))
+                    if(tmpChildList[i].Equals(item))
                     {
                         return false;
                     }
@@ -234,10 +239,62 @@ namespace Algorytmy_projekt2
             return true;
         }
 
+        static bool ChildIsGoodToAddInside(Child actKid, List<Child> ChildList)
+        {
+            List<Child> adj = actKid.GetAdj();
+            List<Child> tmpChildList = new List<Child>(ChildList);
+            int size = tmpChildList.Count() - 1;
+            int index = -1;
+            for( int i = 0; i< size;i++)
+            {
+                Child actualKid = ChildList.ElementAt(i);
+                if(ChildIsGoodToAddAtTheFrontOf(actKid, tmpChildList)==false)
+                {
+                    tmpChildList.RemoveAt(i);
+                    size--;
+                    i--;
+                    continue;
+                }
+                else
+                {
+                    index = i;
+                    //Child elem = ChildList.ElementAt(index);
+                    int flag = 1;
+                    for(int j = 0; i< index; j++)
+                    {
+                        if(DoTheyLikeEachOther(ChildList.ElementAt(i),actKid)==false)
+                        {
+                            flag = 0;
+                        }
+                    }
+                    if(flag==1)
+                    { 
+                        ChildList.Insert(index, actKid);
+                        return true;
+                    }
+                }
+            }
+
+
+            return false;
+        }
+
+        public static bool DoTheyLikeEachOther(Child actKid, Child secKid)
+        {
+            foreach(Child item in actKid.GetAdj())
+            {
+                if(item.Equals(secKid))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
 
         static void Main(string[] args)
         {
-            string filePath = @"E:\jacek.txt";
+            string filePath = @"E:\Somsiad3.txt";
             listaSasiedstwa = GraphFactory.CreateGraphFromFile(filePath);
             //listaSasiedstwa = GraphFactory.CreateGraph();
             Console.WriteLine("Graf podany na wejściu");

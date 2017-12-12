@@ -13,6 +13,7 @@ namespace ClientToServer
         private static Logger.Logger log;
         static void Main(string[] args)
         {
+            int num = 143;
             createLogger();
             TcpClient socketForServer;
             try
