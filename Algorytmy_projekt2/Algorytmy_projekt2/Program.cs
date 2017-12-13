@@ -190,37 +190,59 @@ namespace Algorytmy_projekt2
 
         static void ChildRowsVerification(Child actKid, List<Child> tmpChildList)
         {
-            if(ChildIsGoodToAddAtTheFrontOf(actKid, tmpChildList))
+            //if(ChildIsGoodToAddAtTheFrontOf(actKid, tmpChildList))
+            //{
+            //    tmpChildList.Add(actKid);
+            //    //tmpChildList.Insert(0, actKid);
+            //    actKid.Visit();
+            //}
+            //else if(ChildIsGoodToAddBehind(actKid, tmpChildList))
+            //{
+            //    tmpChildList.Add(actKid);
+            //    actKid.Visit();
+            //}
+            //else if(ChildIsGoodToAddInside(actKid, tmpChildList))
+            //{
+            //    actKid.Visit();
+            //}
+
+            int position = ChildIsGoodToAddAtTheFrontOf(actKid, tmpChildList);
+            if(position==-1)
             {
-                //tmpChildList.Add(actKid);
-                tmpChildList.Insert(0, actKid);
-                actKid.Visit();
+                if(ChildIsGoodToAddBehind(actKid, tmpChildList))
+                {
+                    tmpChildList.Insert(0,actKid);
+                    actKid.Visit();
+                }
             }
-            else if(ChildIsGoodToAddBehind(actKid, tmpChildList))
+            else
             {
-                tmpChildList.Add(actKid);
-                actKid.Visit();
-            }
-            else if(ChildIsGoodToAddInside(actKid, tmpChildList))
-            {
-                actKid.Visit();
+                if(ChildIsGoodToAddInside(actKid, tmpChildList, position))
+                {
+                    tmpChildList.Insert(position, actKid);
+                    actKid.Visit();
+                }
             }
         }
 
-        static bool ChildIsGoodToAddAtTheFrontOf(Child actKid, List<Child> tmpChildList)
+        static int ChildIsGoodToAddAtTheFrontOf(Child actKid, List<Child> tmpChildList)
         {
+            int position = -1;
+            int counter = 0;
             foreach(Child item in tmpChildList)
             {
+                counter++;
                 List<Child> adj = item.GetAdj();
                 foreach(Child adjItem in adj)
                 {
                     if(actKid.Equals(adjItem))
                     {
-                        return false;
+                        return position;
                     }
                 }
+                position = counter;// + 1;
             }
-            return true;
+            return position;
         }
 
         static bool ChildIsGoodToAddBehind(Child actKid, List<Child> tmpChildList)
@@ -239,45 +261,70 @@ namespace Algorytmy_projekt2
             return true;
         }
 
-        static bool ChildIsGoodToAddInside(Child actKid, List<Child> ChildList)
+        static bool ChildIsGoodToAddInside(Child actKid, List<Child> tmpChildList, int position)
         {
             List<Child> adj = actKid.GetAdj();
-            List<Child> tmpChildList = new List<Child>(ChildList);
-            int size = tmpChildList.Count() - 1;
-            int index = -1;
-            for( int i = 0; i< size;i++)
+            for (int i = position; i < tmpChildList.Count() ; i++)
             {
-                Child actualKid = ChildList.ElementAt(i);
-                if(ChildIsGoodToAddAtTheFrontOf(actKid, tmpChildList)==false)
+                foreach (Child item in adj)
                 {
-                    tmpChildList.RemoveAt(i);
-                    size--;
-                    i--;
-                    continue;
-                }
-                else
-                {
-                    index = i;
-                    //Child elem = ChildList.ElementAt(index);
-                    int flag = 1;
-                    for(int j = 0; i< index; j++)
+                    if (tmpChildList[i].Equals(item))
                     {
-                        if(DoTheyLikeEachOther(ChildList.ElementAt(i),actKid)==false)
-                        {
-                            flag = 0;
-                        }
-                    }
-                    if(flag==1)
-                    { 
-                        ChildList.Insert(index, actKid);
-                        return true;
+                        return false;
                     }
                 }
             }
-
-
-            return false;
+            return true;
         }
+
+        //static bool ChildIsGoodToAddInside(Child actKid, List<Child> ChildList)
+        //{
+        //    int position = ChildIsGoodToAddAtTheFrontOf(actKid, ChildList);
+        //    if(position==-1)
+        //    {
+        //        if(ChildIsGoodToAddBehind(actKid, ChildList))
+        //        {
+        //            ChildList.Insert(0, actKid);
+        //            actKid.Visit();
+        //        }
+        //    }
+        //    //List<Child> adj = actKid.GetAdj();
+        //    //List<Child> tmpChildList = new List<Child>(ChildList);
+        //    //int size = tmpChildList.Count() - 1;
+        //    //int index = -1;
+        //    //for( int i = 0; i< size;i++)
+        //    //{
+        //    //    Child actualKid = ChildList.ElementAt(i);
+        //    //    if(ChildIsGoodToAddAtTheFrontOf(actKid, tmpChildList)==false)
+        //    //    {
+        //    //        tmpChildList.RemoveAt(i);
+        //    //        size--;
+        //    //        //i--;
+        //    //        continue;
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        index = i;
+        //    //        //Child elem = ChildList.ElementAt(index);
+        //    //        int flag = 1;
+        //    //        for(int j = 0; i<= index; j++)
+        //    //        {
+        //    //            if(DoTheyLikeEachOther(ChildList.ElementAt(i),actKid)==false)
+        //    //            {
+        //    //                flag = 0;
+        //    //            }
+        //    //        }
+        //    //        if(flag==1)
+        //    //        { 
+        //    //            ChildList.Insert(index, actKid);
+        //    //            return true;
+        //    //        }
+        //    //    }
+        //    //}
+
+
+        //    //return false;
+        //}
 
         public static bool DoTheyLikeEachOther(Child actKid, Child secKid)
         {
@@ -294,7 +341,7 @@ namespace Algorytmy_projekt2
 
         static void Main(string[] args)
         {
-            string filePath = @"E:\Somsiad3.txt";
+            string filePath = @"E:\GrafWalaszek.txt";
             listaSasiedstwa = GraphFactory.CreateGraphFromFile(filePath);
             //listaSasiedstwa = GraphFactory.CreateGraph();
             Console.WriteLine("Graf podany na wejściu");
@@ -379,10 +426,10 @@ namespace Algorytmy_projekt2
 
             Console.WriteLine("\nDo ustawienia dzieci potrzeba " + counter + " rzedow");
 
-            for (int j = listaSkladowych.Count() - 1; j >= 0; j--)
+            for (int j = 0 ;j < listaSkladowych.Count() ; j++)
             {
                 Child[] item = listaSkladowych[j];
-                for (int i = item.Count() - 1; i >= 0; i--)
+                for (int i = 0; i < item.Count() ; i++)
                 {
                     Console.Write(item[i].name + " -> ");
                 }

@@ -12,6 +12,7 @@ namespace Labirynt.Model
         void AddCorritage(string[] textObject , List<Figure> list);
         void AddRoom(string[] textObject , List<Figure> list);
 
+        void AddKey(string[] textObject, List<Figure> list);
         Factory getInstance();
     }
 }

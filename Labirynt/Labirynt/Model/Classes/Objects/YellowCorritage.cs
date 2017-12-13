@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Labirynt.Model.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Labirynt.Model
 {
-    public class YellowCorritage : Figure
+    public class YellowCorritage : Figure, CorritageFace
     {
         Point startPoint;
         Point endPoint;

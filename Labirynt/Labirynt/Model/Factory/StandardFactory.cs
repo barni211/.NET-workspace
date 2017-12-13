@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Labirynt.Model.Classes.Objects;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -22,6 +23,11 @@ namespace Labirynt.Model
             Point x = new Point(Int32.Parse(textObject[1]), Int32.Parse(textObject[2]));
             StandardRoom room = new StandardRoom(x, Int32.Parse(textObject[3]), Int32.Parse(textObject[4]));
             list.Add(room);
+        }
+
+        public void AddKey(string[] textObject, List<Figure> list)
+        {
+           //DO NOTHING
         }
 
         public Factory getInstance()

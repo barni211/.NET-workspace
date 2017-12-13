@@ -1,6 +1,7 @@
 ﻿using Labirynt.Model;
 using Labirynt.Model.Classes;
 using Labirynt.Model.Classes.Objects;
+using Labirynt.Model.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,8 +23,9 @@ namespace Labirynt
         private Pen pencil;
         private Pen playerPencil;
         private Player player;
-        private bool isPlayerInRoom;
+        private bool isPlayerInRoom = false;
         private bool isMagicTypeOn;
+        private Color backGround = Color.Azure;
         
         public frmLabirynt()
         {
@@ -35,7 +37,7 @@ namespace Labirynt
 
         public void DrawMap()
         {
-            g.Clear(Color.Azure);
+            g.Clear(backGround);
             foreach(Figure item in figureList)
             {
                 if (item.GetType() == typeof(Player))
@@ -141,18 +143,26 @@ namespace Labirynt
         public void enterTheRoom()
         {
             Point playerLoc = player.playerPosition();
+            
             foreach (Figure item in figureList)
             {
-                if(item is RoomFace)// || item.GetType() == typeof(RedRoom))
+                if(item.StartPoint() == player.playerPosition() && ! (item is CorritageFace))// || item.GetType() == typeof(RedRoom))
                 {
-                    if (item != null)
+                    dynamic x = item;
+                    string color = Visitator.Visit(player, x, ref isPlayerInRoom, figureList);
+                    if(color.Equals("")==false)
                     {
-                        if (playerLoc.X == item.StartPoint().X && playerLoc.Y == item.StartPoint().Y)
+                        if(backGround == Color.Azure)
                         {
-                            dynamic x = item;
-                            LeaveOrEnterRoom(x);
+                            backGround = Color.Aqua;
                         }
+                        else
+                        {
+                            backGround = Color.Azure;
+                        }
+                       
                     }
+                    break;
                 }
             }
         }
@@ -239,33 +249,6 @@ namespace Labirynt
 
         }
 
-        private void LeaveOrEnterRoom(StandardRoom room)
-        {
-
-            if (isPlayerInRoom==false)
-            {
-                room.enterPlayer();
-                isPlayerInRoom = true;
-            }
-            else
-            {
-                room.leavePlayer();
-                isPlayerInRoom = false;
-            }
-        }
-
-        private void LeaveOrEnterRoom(RedRoom room)
-        {
-            if (isPlayerInRoom==false)
-            {
-                room.enterPlayer();
-                isPlayerInRoom = true;
-            }
-            else
-            {
-                room.leavePlayer();
-                isPlayerInRoom = false;
-            }
-        }
+     
     }
 }

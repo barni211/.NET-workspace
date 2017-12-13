@@ -61,6 +61,14 @@ namespace Labirynt.Model.Classes
                     {
                         factoryObject.AddCorritage(param, figureList);
                     }
+                    else if(param[0].Equals("Key") && maze == MazeType.MAGIC)
+                    {
+                        factoryObject.AddKey(param, figureList);
+                    }
+                    else if(param[0].Equals("MagicRoom") && maze== MazeType.MAGIC)
+                    {
+                        factoryObject.AddRoom(param, figureList);
+                    }
                 }
             }
             return figureList;

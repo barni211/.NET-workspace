@@ -54,7 +54,10 @@
     </Compile>
     <Compile Include="Model\Classes\DataReader\TextFileParser.cs" />
     <Compile Include="Model\Classes\Factory\MazeFactory.cs" />
+    <Compile Include="Model\Classes\Objects\Key.cs" />
+    <Compile Include="Model\Classes\Objects\MagicRoom.cs" />
     <Compile Include="Model\Classes\Objects\Room.cs" />
+    <Compile Include="Model\Classes\Objects\Visitator.cs" />
     <Compile Include="Model\Enums\MazeType.cs" />
     <Compile Include="Model\Factory\ColorFactory.cs" />
     <Compile Include="Model\Classes\Objects\Corritage.cs" />
@@ -64,12 +67,20 @@
     <Compile Include="Model\Classes\Objects\Player.cs" />
     <Compile Include="Model\Classes\Objects\RedRoom.cs" />
     <Compile Include="Model\Classes\Objects\StandardRoom.cs" />
+    <Compile Include="Model\Interfaces\CorritageFace.cs" />
     <Compile Include="Model\Interfaces\IVisitable.cs" />
+    <Compile Include="Model\Interfaces\IVisitator.cs" />
     <Compile Include="Model\Interfaces\RoomFace.cs" />
     <Compile Include="Model\Factory\StandardFactory.cs" />
     <Compile Include="Model\Classes\Objects\YellowCorritage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpellForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SpellForm.Designer.cs">
+      <DependentUpon>SpellForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmLabirynt.resx">
       <DependentUpon>frmLabirynt.cs</DependentUpon>
     </EmbeddedResource>
@@ -82,6 +93,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SpellForm.resx">
+      <DependentUpon>SpellForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
