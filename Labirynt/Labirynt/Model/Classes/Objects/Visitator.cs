@@ -13,7 +13,14 @@ namespace Labirynt.Model.Classes.Objects
         {
             p.GetKey(k);
             figureList.Remove(k);
-            MessageBox.Show("Znalazłeś klucz! Twoja liczba kluczy to: " + p.KeyCounter());
+            if(p.KeyCounter()==MazeFactory.KeyCounter)
+            {
+                MessageBox.Show("Gratulacje, znalazłeś ostatni klucz! Teraz masz ich " + p.KeyCounter());
+            }
+            else
+            {
+                MessageBox.Show("Znalazłeś klucz! Twoja liczba kluczy to: " + p.KeyCounter());
+            }
             return "";
         }
 

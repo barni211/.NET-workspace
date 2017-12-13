@@ -68,8 +68,6 @@
     <Compile Include="Model\Classes\Objects\RedRoom.cs" />
     <Compile Include="Model\Classes\Objects\StandardRoom.cs" />
     <Compile Include="Model\Interfaces\CorritageFace.cs" />
-    <Compile Include="Model\Interfaces\IVisitable.cs" />
-    <Compile Include="Model\Interfaces\IVisitator.cs" />
     <Compile Include="Model\Interfaces\RoomFace.cs" />
     <Compile Include="Model\Factory\StandardFactory.cs" />
     <Compile Include="Model\Classes\Objects\YellowCorritage.cs" />

@@ -13,7 +13,7 @@ namespace Labirynt
     public partial class SpellForm : Form
     {
         private bool SpellCheck = false;
-        private string SpellVerb = "Abrakadabra";
+        //private string SpellVerb = "Abrakadabra";
         private int counter;
         
         public SpellForm()

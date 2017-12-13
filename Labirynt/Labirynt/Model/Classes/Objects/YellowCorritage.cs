@@ -21,7 +21,7 @@ namespace Labirynt.Model
 
         public void Draw(Pen p, Graphics g)
         {
-            p.Color = Color.Yellow;
+            p.Color = Color.Blue;
             g.DrawLine(p, startPoint, endPoint);
             p.Color = Color.Black;
         }

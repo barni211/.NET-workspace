@@ -12,6 +12,7 @@ namespace Labirynt.Model.Classes
     public class MazeFactory
     {
         private Dictionary<string, Figure> elementTypeList;
+        public static int KeyCounter = 0;
         private Dictionary<MazeType, Factory> mazeList;
         private Dictionary<string, MazeType> mazeTypeConverter; //mapa mazeTypeConverter powstała w celu uniknięcia switcha przy wyborze typu labiryntu
         private List<Figure> figureList;                        //switch został w kodzie - do wyjaśnienia które rozwiązanie byłoby lepsze.
@@ -63,6 +64,7 @@ namespace Labirynt.Model.Classes
                     }
                     else if(param[0].Equals("Key") && maze == MazeType.MAGIC)
                     {
+                        KeyCounter++;
                         factoryObject.AddKey(param, figureList);
                     }
                     else if(param[0].Equals("MagicRoom") && maze== MazeType.MAGIC)
