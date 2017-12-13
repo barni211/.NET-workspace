@@ -152,15 +152,7 @@ namespace Labirynt
                     string color = Visitator.Visit(player, x, ref isPlayerInRoom, figureList);
                     if(color.Equals("")==false)
                     {
-                        if(backGround == Color.Azure)
-                        {
-                            backGround = Color.Aqua;
-                        }
-                        else
-                        {
-                            backGround = Color.Azure;
-                        }
-                       
+                        ChangeColor();                      
                     }
                     break;
                 }
@@ -247,6 +239,18 @@ namespace Labirynt
         private void button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        public void ChangeColor()
+        {
+            if (backGround == Color.Azure)
+            {
+                backGround = Color.Aqua;
+            }
+            else
+            {
+                backGround = Color.Azure;
+            }
         }
 
      
