@@ -14,6 +14,11 @@ using System.Windows.Forms;
 
 namespace Labirynt
 {
+    //problem rysowania klasy mazeElement(Figura)
+    //Etap projektowania architektury
+    //Czy mazeElement musi być rysowalny
+    //Czy może jendak wszystkie elementy powinny być w innych listach? To rodzi następne problemy.
+    //
     public partial class frmLabirynt : Form
     {
         private int imageWidth;
@@ -149,7 +154,7 @@ namespace Labirynt
                 if(item.StartPoint() == player.playerPosition() && ! (item is CorritageFace))// || item.GetType() == typeof(RedRoom))
                 {
                     dynamic x = item;
-                    string color = Visitator.Visit(player, x, ref isPlayerInRoom, figureList);
+                    string color = Visitor.Visit(player, x, ref isPlayerInRoom, figureList);
                     if(color.Equals("")==false)
                     {
                         ChangeColor();                      

@@ -57,7 +57,7 @@
     <Compile Include="Model\Classes\Objects\Key.cs" />
     <Compile Include="Model\Classes\Objects\MagicRoom.cs" />
     <Compile Include="Model\Classes\Objects\Room.cs" />
-    <Compile Include="Model\Classes\Objects\Visitator.cs" />
+    <Compile Include="Model\Classes\Objects\Visitor.cs" />
     <Compile Include="Model\Enums\MazeType.cs" />
     <Compile Include="Model\Factory\ColorFactory.cs" />
     <Compile Include="Model\Classes\Objects\Corritage.cs" />
