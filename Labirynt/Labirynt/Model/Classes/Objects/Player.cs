@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Labirynt.Model.Classes.Objects;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -10,9 +11,11 @@ namespace Labirynt.Model
     public class Player : Figure
     {
         private Point location;
+        private List<Key> keys;
         public Player(Point p)
         {
             this.location = p;
+            keys = new List<Key>();
         }
 
         public void Draw(Pen p, Graphics g)
@@ -51,7 +54,17 @@ namespace Labirynt.Model
 
         public Point StartPoint()
         {
-            throw new NotImplementedException();
+            return this.location;// throw new NotImplementedException();
+        }
+
+        public void GetKey(Key k)
+        {
+            keys.Add(k);          
+        }
+
+        public int KeyCounter()
+        {
+            return keys.Count();
         }
 
     

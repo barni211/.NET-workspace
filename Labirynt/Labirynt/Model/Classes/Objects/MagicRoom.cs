@@ -5,16 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Labirynt.Model
+namespace Labirynt.Model.Classes.Objects
 {
-    public class Room : Figure, RoomFace
+    public class MagicRoom : Figure, RoomFace
     {
         private Point location;
         private int width;
         private int length;
         private bool isPlayerInRoom = false;
-        
-        public Room(Point p, int width, int length)
+
+        public MagicRoom(Point p, int width, int length)
         {
             this.location = p;
             this.width = width;
@@ -23,11 +23,11 @@ namespace Labirynt.Model
 
         public void Draw(Pen p, Graphics g)
         {
-            if(isPlayerInRoom==true)
-            {    
-                g.FillRectangle(new SolidBrush(Color.Green), location.X, location.Y, width, length);
+            if (isPlayerInRoom == true)
+            {
+                g.FillRectangle(new SolidBrush(Color.LightBlue), location.X, location.Y, width, length);
             }
-            p.Color = Color.Blue;
+            p.Color = Color.Red;
             g.DrawRectangle(p, location.X, location.Y, width, length);
             p.Color = Color.Black;
         }

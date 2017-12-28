@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Labirynt.Model.Classes.Objects;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -7,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Labirynt.Model
 {
-    public class RedRoom : Figure, RoomFace
+    public class StandardRoom : Room, Figure, RoomFace
     {
         private Point location;
         private int width;
         private int length;
         private bool isPlayerInRoom = false;
-
-        public RedRoom(Point p, int width, int length)
+        
+        public StandardRoom(Point p, int width, int length)
         {
             this.location = p;
             this.width = width;
@@ -23,11 +24,11 @@ namespace Labirynt.Model
 
         public void Draw(Pen p, Graphics g)
         {
-            if (isPlayerInRoom == true)
-            {
-                g.FillRectangle(new SolidBrush(Color.Black), location.X, location.Y, width, length);
+            if(isPlayerInRoom==true)
+            {    
+                g.FillRectangle(new SolidBrush(Color.Green), location.X, location.Y, width, length);
             }
-            p.Color = Color.Red;
+            p.Color = Color.Blue;
             g.DrawRectangle(p, location.X, location.Y, width, length);
             p.Color = Color.Black;
         }

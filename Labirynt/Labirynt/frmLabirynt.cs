@@ -1,4 +1,7 @@
 ﻿using Labirynt.Model;
+using Labirynt.Model.Classes;
+using Labirynt.Model.Classes.Objects;
+using Labirynt.Model.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +14,11 @@ using System.Windows.Forms;
 
 namespace Labirynt
 {
+    //problem rysowania klasy mazeElement(Figura)
+    //Etap projektowania architektury
+    //Czy mazeElement musi być rysowalny
+    //Czy może jendak wszystkie elementy powinny być w innych listach? To rodzi następne problemy.
+    //
     public partial class frmLabirynt : Form
     {
         private int imageWidth;
@@ -20,8 +28,9 @@ namespace Labirynt
         private Pen pencil;
         private Pen playerPencil;
         private Player player;
-        private bool isPlayerInRoom;
+        private bool isPlayerInRoom = false;
         private bool isMagicTypeOn;
+        private Color backGround = Color.Azure;
         
         public frmLabirynt()
         {
@@ -33,7 +42,7 @@ namespace Labirynt
 
         public void DrawMap()
         {
-            g.Clear(Color.Azure);
+            g.Clear(backGround);
             foreach(Figure item in figureList)
             {
                 if (item.GetType() == typeof(Player))
@@ -71,21 +80,18 @@ namespace Labirynt
 
         public void AddElements(int value)
         {
-            
-            Factory myFactory;
+            MazeFactory factoryObject = new MazeFactory();
             figureList.Clear();
-            
             if (value==1)
             {
-                myFactory = new StandardFactory();
-                isMagicTypeOn = false;
+                figureList = factoryObject.CreateMazeFromTextFile(@"E:\StandardFactory.txt");
             }
-            else
+            else if(value==2)
             {
-                myFactory = new ColorFactory();
+                figureList = factoryObject.CreateMazeFromTextFile(@"E:\MagicFactory.txt");
             }
-            figureList = myFactory.createObjects();
             CreatePlayer();
+            DrawMap();
         }
 
         
@@ -142,24 +148,18 @@ namespace Labirynt
         public void enterTheRoom()
         {
             Point playerLoc = player.playerPosition();
+            
             foreach (Figure item in figureList)
             {
-                if(item.GetType() == typeof(Room) || item.GetType()== typeof(RedRoom))
+                if(item.StartPoint() == player.playerPosition() && ! (item is CorritageFace))// || item.GetType() == typeof(RedRoom))
                 {
-                    if (playerLoc.X == item.StartPoint().X && playerLoc.Y == item.StartPoint().Y)
+                    dynamic x = item;
+                    string color = Visitor.Visit(player, x, ref isPlayerInRoom, figureList);
+                    if(color.Equals("")==false)
                     {
-                        RoomFace r1 = (RoomFace)item;
-                        if(r1.playerInside())
-                        {
-                            r1.leavePlayer();
-                            isPlayerInRoom = false;
-                        }
-                        else
-                        {
-                            r1.enterPlayer();
-                            isPlayerInRoom = true;
-                        }
+                        ChangeColor();                      
                     }
+                    break;
                 }
             }
         }
@@ -182,6 +182,8 @@ namespace Labirynt
                 {
                     continue;
                 }
+
+                //ten switch jest do porozbiania i wydzielenia w osobne metody, zeby nie zostala taka kobyla
                 switch(motion)
                 {
                     case Model.Move.Up:
@@ -245,5 +247,19 @@ namespace Labirynt
         {
 
         }
+
+        public void ChangeColor()
+        {
+            if (backGround == Color.Azure)
+            {
+                backGround = Color.Aqua;
+            }
+            else
+            {
+                backGround = Color.Azure;
+            }
+        }
+
+     
     }
 }
