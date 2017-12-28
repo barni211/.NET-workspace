@@ -182,6 +182,8 @@ namespace Labirynt
                 {
                     continue;
                 }
+
+                //ten switch jest do porozbiania i wydzielenia w osobne metody, zeby nie zostala taka kobyla
                 switch(motion)
                 {
                     case Model.Move.Up:

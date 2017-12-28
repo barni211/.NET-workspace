@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Labirynt.Model.Classes.Objects
 {
-    public class Visitator
+    public class Visitor
     {
         public static string Visit(Player p, Key k, ref bool isPlayerInRoom, List<Figure> figureList)
         {
