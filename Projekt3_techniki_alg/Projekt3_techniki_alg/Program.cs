@@ -51,7 +51,7 @@ namespace Projekt3_techniki_alg
 
             for(int i = 0;i< size;i++)
             {
-                tab.Add(rand.Next(1000));
+                tab.Add(rand.Next(10000));
                 Console.Write(tab[i] + ", ");
             }
 
@@ -82,6 +82,7 @@ namespace Projekt3_techniki_alg
             }
             Stop();
             SaveTime();
+            Console.WriteLine("\nLicznik " + licznik);
             Console.WriteLine("\nTime: " + time);
 
             Console.WriteLine("\t\t\tMetoda kubełkowa:");
@@ -142,7 +143,7 @@ namespace Projekt3_techniki_alg
                         }
                         if(nextList!=null)
                         {
-                            for(int p =0; p< nextList.Count() - 1; p++)
+                            for(int p =0; p< nextList.Count() ; p++)
                             {
                                 if(Math.Abs(currentPoint - nextList.ElementAt(p)) < R)
                                 {
