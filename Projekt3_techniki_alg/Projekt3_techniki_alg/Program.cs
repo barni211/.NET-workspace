@@ -16,6 +16,12 @@ namespace Projekt3_techniki_alg
         private static Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
         private static List<string> resultList = new List<string>();
 
+        private static List<long> metodaBazowa = new List<long>();
+        private static List<long> metodaKubelkowa = new List<long>();
+
+        private static List<int> iloscPunktow = new List<int>();
+
+
         public static void Start()
         {
             watch.Start();
@@ -31,139 +37,51 @@ namespace Projekt3_techniki_alg
             time = watch.ElapsedMilliseconds;
         }
 
-        private static int MaxValFromDict(Dictionary<int, List<int>> list)
-        {
-            int max = -1;
-            foreach(int key in list.Keys)
-            {
-                if (key > max)
-                {
-                    max = key;
-                }
-            }
-            return max;
-        }
 
 
         static void Main(string[] args)
         {
-            Random rand = new Random();
 
-            for(int i = 0;i< size;i++)
+            SortingAndBoxMethods sortingAndBox = new SortingAndBoxMethods(resultList, metodaBazowa, metodaKubelkowa, iloscPunktow);
+            sortingAndBox.Calculate();
+
+            Console.WriteLine("Metoda bazowa : Metoda kublekowa");
+            for (int i  =0; i< iloscPunktow.Count(); i++)
             {
-                tab.Add(rand.Next(10000));
-                Console.Write(tab[i] + ", ");
+                Console.WriteLine(iloscPunktow[i] + " -> " + metodaBazowa[i] + " : " + metodaKubelkowa[i]);
+            }
+
+            ChartForm chr = new ChartForm();
+
+            chr.AddBasicMetodChart(iloscPunktow, metodaBazowa);
+            chr.AddBoxMetodChart(iloscPunktow, metodaKubelkowa);
+            //chr.RefreshChart();
+
+            chr.ShowDialog();
+
+
+            // -------------------------------------------------------------------------------------------Jarvis i graham
+
+            int numberOfPoints = 20;
+           // Dictionary<int, long> grahamDic = new Dictionary<int, long>(); 
+            for (int i = 0; i < 10; i++)
+            {
+                //numberOfPoints += 10;
+                watch.Reset();
+                Start();
+                Graham g = new Graham(numberOfPoints);
+                g.RunGraham();
+                Stop();
+                SaveTime();
+                g.CleanUp();
+                Console.WriteLine("\nCzas działania algorytmu grahama dla " + numberOfPoints + " punktów: " + time);
             }
 
 
-            int licznik = 0;
-            int z = 0;
-
-            tab.Sort();
-            Start();
-            for(int i =0;i< size; i++)
-            {
-                z = i + 1;
-                if(z>=tab.Count)
-                {
-                    break;
-                }
-
-                while(Math.Abs( tab.ElementAt(z) - tab.ElementAt(i) ) < R)
-                {
-                    licznik++;
-                    resultList.Add("[" + tab.ElementAt(i) + ", " + tab.ElementAt(z) + "]; ");
-                    z++;
-                    if(z>=tab.Count)
-                    {
-                        break;
-                    }
-                }
-            }
-            Stop();
-            SaveTime();
-            Console.WriteLine("\nLicznik " + licznik);
-            Console.WriteLine("\nTime: " + time);
-
-            Console.WriteLine("\t\t\tMetoda kubełkowa:");
-
-            Dictionary<int, List<int>> map = new Dictionary<int, List<int>>();
-
-            foreach(int elem in tab)
-            {
-                int tmpVal = (int)Math.Floor((double)elem / (double)R);
-                if (map.ContainsKey(tmpVal) == false)
-                {
-                    map.Add(tmpVal, new List<int>());
-                }
-            }
-
-           
-
-            foreach(int elem in tab)
-            {
-                int tmpVal = (int)Math.Floor((double)elem / (double)R);
-                if (map.ContainsKey(tmpVal) == true )
-                {
-                    map[tmpVal].Add(elem);
-                }
-            }
-
-            watch.Reset();
-            Start();
-
-            int index = 0;
-            licznik = 0;
-
-            int maxValue = MaxValFromDict(map);
-            while(index <= maxValue)
-            {
-                List<int> currList = null;
-                List<int> nextList = null;
-                if (map.ContainsKey(index))
-                {
-                    currList = map[index];
-                }
-               
-                if (map.ContainsKey(index + 1))
-                {
-                    nextList = map[index + 1];
-                }
-             
-                
-                if(currList!=null)
-                {
-                    for(int i = 0; i < currList.Count; i++)
-                    {
-                        int currentPoint = currList.ElementAt(i);
-                        for(int j = i+1;j<currList.Count(); j++)
-                        {
-                            licznik++;
-                            resultList.Add("[" + currentPoint + ", " + currList.ElementAt(j) + "];");
-                        }
-                        if(nextList!=null)
-                        {
-                            for(int p =0; p< nextList.Count() ; p++)
-                            {
-                                if(Math.Abs(currentPoint - nextList.ElementAt(p)) < R)
-                                {
-                                    licznik++;
-                                    resultList.Add("[" + currentPoint + ", " + nextList.ElementAt(p) + "];");
-                                }
-                            }
-                        }
-                    }
-                }
-                index++;
-            }
-            Stop();
-            SaveTime();
-
-            Console.WriteLine("\nTime: " + time);
-            Console.WriteLine("Licznik " + licznik);
-            Console.Read();
-
+            Console.ReadKey();
         }
+
+
 
 
        
