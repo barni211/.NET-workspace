@@ -16,6 +16,11 @@ namespace Projekt3_techniki_alg
         private static Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
         private static List<string> resultList = new List<string>();
 
+        private static List<long> metodaBazowa = new List<long>();
+        private static List<long> metodaKubelkowa = new List<long>();
+
+        private static List<int> iloscPunktow = new List<int>();
+
         public static void Start()
         {
             watch.Start();
@@ -47,121 +52,147 @@ namespace Projekt3_techniki_alg
 
         static void Main(string[] args)
         {
-            Random rand = new Random();
 
-            for(int i = 0;i< size;i++)
+            for (int h = 0; h < 10; h++)
             {
-                tab.Add(rand.Next(10000));
-                Console.Write(tab[i] + ", ");
-            }
+                iloscPunktow.Add(size);
 
+                Random rand = new Random();
 
-            int licznik = 0;
-            int z = 0;
-
-            tab.Sort();
-            Start();
-            for(int i =0;i< size; i++)
-            {
-                z = i + 1;
-                if(z>=tab.Count)
+                for (int i = 0; i < size; i++)
                 {
-                    break;
+                    tab.Add(rand.Next(1000000));
+                    //Console.Write(tab[i] + ", ");
                 }
 
-                while(Math.Abs( tab.ElementAt(z) - tab.ElementAt(i) ) < R)
+
+                int licznik = 0;
+                int z = 0;
+
+                tab.Sort();
+                Start();
+                for (int i = 0; i < size; i++)
                 {
-                    licznik++;
-                    resultList.Add("[" + tab.ElementAt(i) + ", " + tab.ElementAt(z) + "]; ");
-                    z++;
-                    if(z>=tab.Count)
+                    z = i + 1;
+                    if (z >= tab.Count)
                     {
                         break;
                     }
-                }
-            }
-            Stop();
-            SaveTime();
-            Console.WriteLine("\nLicznik " + licznik);
-            Console.WriteLine("\nTime: " + time);
 
-            Console.WriteLine("\t\t\tMetoda kubełkowa:");
-
-            Dictionary<int, List<int>> map = new Dictionary<int, List<int>>();
-
-            foreach(int elem in tab)
-            {
-                int tmpVal = (int)Math.Floor((double)elem / (double)R);
-                if (map.ContainsKey(tmpVal) == false)
-                {
-                    map.Add(tmpVal, new List<int>());
-                }
-            }
-
-           
-
-            foreach(int elem in tab)
-            {
-                int tmpVal = (int)Math.Floor((double)elem / (double)R);
-                if (map.ContainsKey(tmpVal) == true )
-                {
-                    map[tmpVal].Add(elem);
-                }
-            }
-
-            watch.Reset();
-            Start();
-
-            int index = 0;
-            licznik = 0;
-
-            int maxValue = MaxValFromDict(map);
-            while(index <= maxValue)
-            {
-                List<int> currList = null;
-                List<int> nextList = null;
-                if (map.ContainsKey(index))
-                {
-                    currList = map[index];
-                }
-               
-                if (map.ContainsKey(index + 1))
-                {
-                    nextList = map[index + 1];
-                }
-             
-                
-                if(currList!=null)
-                {
-                    for(int i = 0; i < currList.Count; i++)
+                    while (Math.Abs(tab.ElementAt(z) - tab.ElementAt(i)) < R)
                     {
-                        int currentPoint = currList.ElementAt(i);
-                        for(int j = i+1;j<currList.Count(); j++)
+                        licznik++;
+                        resultList.Add("[" + tab.ElementAt(i) + ", " + tab.ElementAt(z) + "]; ");
+                        z++;
+                        if (z >= tab.Count)
                         {
-                            licznik++;
-                            resultList.Add("[" + currentPoint + ", " + currList.ElementAt(j) + "];");
+                            break;
                         }
-                        if(nextList!=null)
+                    }
+                }
+                Stop();
+                SaveTime();
+                //Console.WriteLine("\nLicznik " + licznik);
+                //Console.WriteLine("\nTime: " + time);
+                metodaBazowa.Add(time);
+
+                //Console.WriteLine("\t\t\tMetoda kubełkowa:");
+
+                Dictionary<int, List<int>> map = new Dictionary<int, List<int>>();
+
+                foreach (int elem in tab)
+                {
+                    int tmpVal = (int)Math.Floor((double)elem / (double)R);
+                    if (map.ContainsKey(tmpVal) == false)
+                    {
+                        map.Add(tmpVal, new List<int>());
+                    }
+                }
+
+
+
+                foreach (int elem in tab)
+                {
+                    int tmpVal = (int)Math.Floor((double)elem / (double)R);
+                    if (map.ContainsKey(tmpVal) == true)
+                    {
+                        map[tmpVal].Add(elem);
+                    }
+                }
+
+                watch.Reset();
+                Start();
+
+                int index = 0;
+                licznik = 0;
+
+                int maxValue = MaxValFromDict(map);
+                while (index <= maxValue)
+                {
+                    List<int> currList = null;
+                    List<int> nextList = null;
+                    if (map.ContainsKey(index))
+                    {
+                        currList = map[index];
+                    }
+
+                    if (map.ContainsKey(index + 1))
+                    {
+                        nextList = map[index + 1];
+                    }
+
+
+                    if (currList != null)
+                    {
+                        for (int i = 0; i < currList.Count; i++)
                         {
-                            for(int p =0; p< nextList.Count() ; p++)
+                            int currentPoint = currList.ElementAt(i);
+                            for (int j = i + 1; j < currList.Count(); j++)
                             {
-                                if(Math.Abs(currentPoint - nextList.ElementAt(p)) < R)
+                                licznik++;
+                                resultList.Add("[" + currentPoint + ", " + currList.ElementAt(j) + "];");
+                            }
+                            if (nextList != null)
+                            {
+                                for (int p = 0; p < nextList.Count(); p++)
                                 {
-                                    licznik++;
-                                    resultList.Add("[" + currentPoint + ", " + nextList.ElementAt(p) + "];");
+                                    if (Math.Abs(currentPoint - nextList.ElementAt(p)) < R)
+                                    {
+                                        licznik++;
+                                        resultList.Add("[" + currentPoint + ", " + nextList.ElementAt(p) + "];");
+                                    }
                                 }
                             }
                         }
                     }
+                    index++;
                 }
-                index++;
-            }
-            Stop();
-            SaveTime();
+                Stop();
+                SaveTime();
 
-            Console.WriteLine("\nTime: " + time);
-            Console.WriteLine("Licznik " + licznik);
-            Console.Read();
+                //Console.WriteLine("\nTime: " + time);
+                //Console.WriteLine("Licznik " + licznik);
+                metodaKubelkowa.Add(time);
+
+                map.Clear();
+                tab.Clear();
+                size += 50000;
+                //Console.Read();
+            }
+
+            Console.WriteLine("Metoda bazowa : Metoda kublekowa");
+            for (int i  =0; i< iloscPunktow.Count(); i++)
+            {
+                Console.WriteLine(metodaBazowa[i] + " : " + metodaKubelkowa[i]);
+            }
+
+            ChartForm chr = new ChartForm();
+
+            chr.AddBasicMetodChart(iloscPunktow, metodaBazowa);
+            chr.AddBoxMetodChart(iloscPunktow, metodaKubelkowa);
+            //chr.RefreshChart();
+
+            chr.ShowDialog();
 
         }
 
