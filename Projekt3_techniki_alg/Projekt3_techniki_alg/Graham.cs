@@ -13,21 +13,30 @@ namespace Projekt3_techniki_alg
         private List<Point> pointsAndDegrees = new List<Point>();
         private int firstApexIndex;
         private Dictionary<Point, double> degree = new Dictionary<Point, double>();
+        private int numberOfAllPoints;
+        private List<Point> shellApexes = new List<Point>();
 
-        public Graham()
+        public Graham(int numberOfAllPoints)
         {
+            this.numberOfAllPoints = numberOfAllPoints;
+        }
 
+        public void CleanUp()
+        {
+            pointsAndDegrees.Clear();
+            degree.Clear();
+            shellApexes.Clear();
         }
 
         public List<Point> RunGraham()
         {
-            PointLottery(20, 10, 10);
+            PointLottery(numberOfAllPoints, 10, 10);
             firstApexIndex = FindFirstApex();
             SetLowestApexOnFirstPosition();
             SortPointAndDegrees();
             pointsAndDegrees.Add(pointsAndDegrees[0]);
 
-            List<Point> shellApexes = new List<Point>();
+            //List<Point> shellApexes = new List<Point>();
             shellApexes.Add(pointsAndDegrees[0]);
             shellApexes.Add(pointsAndDegrees[1]);
             shellApexes.Add(pointsAndDegrees[2]);

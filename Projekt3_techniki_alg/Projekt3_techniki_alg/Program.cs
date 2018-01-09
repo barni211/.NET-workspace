@@ -62,13 +62,20 @@ namespace Projekt3_techniki_alg
 
             // -------------------------------------------------------------------------------------------Jarvis i graham
 
-            watch.Reset();
-            Start();
-            Graham g = new Graham();
-            g.RunGraham();
-            Stop();
-            SaveTime();
-            Console.WriteLine("\nCzas działania algorytmu grahama: " + time);
+            int numberOfPoints = 20;
+           // Dictionary<int, long> grahamDic = new Dictionary<int, long>(); 
+            for (int i = 0; i < 10; i++)
+            {
+                //numberOfPoints += 10;
+                watch.Reset();
+                Start();
+                Graham g = new Graham(numberOfPoints);
+                g.RunGraham();
+                Stop();
+                SaveTime();
+                g.CleanUp();
+                Console.WriteLine("\nCzas działania algorytmu grahama dla " + numberOfPoints + " punktów: " + time);
+            }
 
 
             Console.ReadKey();
