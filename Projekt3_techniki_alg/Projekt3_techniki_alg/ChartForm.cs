@@ -15,7 +15,7 @@ namespace Projekt3_techniki_alg
         public ChartForm()
         {
             InitializeComponent();
-            chart1.Series.Add("MetodaBazowa");
+            chart1.Series.Add("MetodaSortujaca");
             chart1.Series.Add("MetodaKubelkowa");
             chart1.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             chart1.Series[1].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
