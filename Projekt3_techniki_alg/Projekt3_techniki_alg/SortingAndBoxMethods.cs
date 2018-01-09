@@ -103,6 +103,14 @@ namespace Projekt3_techniki_alg
                 //Console.WriteLine("\nTime: " + time);
                 metodaBazowa.Add(time);
 
+                //tab.Clear();
+
+                //for (int i = 0; i < size; i++)
+                //{
+                //    tab.Add(rand.Next(1000000));
+                //    //Console.Write(tab[i] + ", ");
+                //}
+
                 //Console.WriteLine("\t\t\tMetoda kubełkowa:");
 
                 Dictionary<int, List<int>> map = new Dictionary<int, List<int>>();
@@ -177,14 +185,11 @@ namespace Projekt3_techniki_alg
                 Stop();
                 SaveTime();
 
-                //Console.WriteLine("\nTime: " + time);
-                //Console.WriteLine("Licznik " + licznik);
-                metodaKubelkowa.Add(time);
 
+                metodaKubelkowa.Add(time);
                 map.Clear();
                 tab.Clear();
                 size += 50000;
-                //Console.Read();
             }
         }
 

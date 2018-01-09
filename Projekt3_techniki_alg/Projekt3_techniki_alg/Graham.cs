@@ -30,11 +30,12 @@ namespace Projekt3_techniki_alg
 
         public List<Point> RunGraham()
         {
-            PointLottery(numberOfAllPoints, 10, 10);
+            PointLottery(numberOfAllPoints, 30, 30);
             firstApexIndex = FindFirstApex();
             SetLowestApexOnFirstPosition();
             SortPointAndDegrees();
             pointsAndDegrees.Add(pointsAndDegrees[0]);
+
 
             //List<Point> shellApexes = new List<Point>();
             shellApexes.Add(pointsAndDegrees[0]);
@@ -44,7 +45,7 @@ namespace Projekt3_techniki_alg
             for (int i = 3; i < pointsAndDegrees.Count(); ++i)
             {
                 int size = shellApexes.Count();
-                while (CalculateMatrixDeterminant(shellApexes[size - 2], shellApexes[size - 1], pointsAndDegrees[i]) < 0)
+                while (size > 1 && CalculateMatrixDeterminant(shellApexes[size - 2], shellApexes[size - 1], pointsAndDegrees[i]) < 0)
                 {
                     Point itemToRemove = shellApexes[size - 1];
                     shellApexes.Remove(itemToRemove);
@@ -53,10 +54,10 @@ namespace Projekt3_techniki_alg
                 shellApexes.Add(pointsAndDegrees[i]);
             }
 
-            foreach(Point p in shellApexes)
-            {
-                Console.WriteLine("[" + p.X + "," + p.Y + "]");
-            }
+            //foreach (Point p in shellApexes)
+            //{
+            //    Console.WriteLine("[" + p.X + "," + p.Y + "]");
+            //}
 
             return shellApexes;
         }
