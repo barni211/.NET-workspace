@@ -17,7 +17,7 @@ namespace QuickSortMultiThread
             Random rand = new Random();
             for (int i = 0; i < size; i++)
             {
-                tab[i] = rand.Next(30);
+                tab[i] = rand.Next(70);
                 Console.Write(tab[i] + "\t");
             }
             Console.WriteLine("\nPo sorotowaniu");

@@ -48,13 +48,7 @@ namespace QuickSortMultiThread
             //}
             if (low < high)
             {
-                /* pi is partitioning index, arr[p] is now
-                   at right place */
                 int pivot = Partition(low, high);
-
-                //(arr, low, pi - 1);  // Before pi
-                //quickSort(arr, pi + 1, high); // After pi
-
                 Thread leftTab = new Thread(() => Sort(low, pivot - 1));
                 leftTab.Start();
                 Thread rightTab = new Thread(() => Sort(pivot + 1, high));
@@ -76,30 +70,20 @@ namespace QuickSortMultiThread
         {
             int pivot = tab[high];
 
-            int i = (low - 1);  // Index of smaller element
+            int i = (low - 1);  // Indeks najmniejszego elementu
 
             for (int j = low; j <= high - 1; j++)
             {
-                // If current element is smaller than or
-                // equal to pivot
+                // Jeżeli element jest mniejszy bądź równy pivot
                 if (tab[j] <= pivot)
                 {
-                    i++;    // increment index of smaller element
-                    Swap(i, j);//[i] and arr[j]
+                    i++;    // zwiększ indeks najmniejszego elementu
+                    Swap(i, j);
                 }
             }
-            Swap(i + 1, high);///[i + 1] and arr[high])
+            Swap(i + 1, high);
             return (i + 1);
         }
-
-        //private void SortHelper(int i, int j)
-        //{
-        //    //tutaj wywolac sortowanie dla lewej i prawej strony.
- 
-
-
-
-        //}
 
     }
 }
