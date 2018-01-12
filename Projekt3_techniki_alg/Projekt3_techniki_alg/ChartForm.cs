@@ -16,23 +16,23 @@ namespace Projekt3_techniki_alg
         public ChartForm()
         {
             InitializeComponent();
-            chart1.Series.Add("MetodaSortujaca");
+            chart1.Series[0].Name = "MetodaSortujaca";
             chart1.Series.Add("MetodaKubelkowa");
+           
             chart1.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            chart1.Series[0].MarkerBorderWidth = 500;
+            chart1.Series[0].MarkerSize = 1000;
+
             chart1.Series[1].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             chart1.Series[1].MarkerBorderWidth = 500;
             chart1.Series[1].MarkerSize = 1000;
-
-            chart1.Series[2].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            chart1.Series[2].MarkerBorderWidth = 500;
-            chart1.Series[2].MarkerSize = 1000;
 
         }
 
         public void RenameToJarvisAndGraham()
         {
-            chart1.Series[1].Name = "Graham";
-            chart1.Series[2].Name = "Jarvis";
+            chart1.Series[0].Name = "Graham";
+            chart1.Series[1].Name = "Jarvis";
             jarvisAndGraham = 1;
         }
 
@@ -45,7 +45,7 @@ namespace Projekt3_techniki_alg
                     continue;
                 }
                 Point p = new Point((int)values[i], (int)points[i]);
-                chart1.Series[1].Points.Add(p.X, p.Y);
+                chart1.Series[0].Points.Add(p.X, p.Y);
             }
             
         }
@@ -59,7 +59,7 @@ namespace Projekt3_techniki_alg
                     continue;
                 }
                 Point p = new Point((int)values[i], (int)points[i]);
-                chart1.Series[2].Points.Add(p.X, p.Y);
+                chart1.Series[1].Points.Add(p.X, p.Y);
             }
         }
 
